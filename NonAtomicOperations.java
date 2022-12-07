@@ -46,13 +46,13 @@ public class NonAtomicOperations {
     private static class InventoryCounter{
         private int items =0;
 
-        public void increment(){
+        public synchronized void increment(){
             items++; //non-atomic statement
         }
-        public void decrement(){
+        public synchronized void decrement(){
             items--; //non-atomic statement
         }
-        public int getItems(){
+        public synchronized int getItems(){
             return items;
         }
     }
