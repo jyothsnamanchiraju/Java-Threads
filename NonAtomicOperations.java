@@ -45,15 +45,22 @@ public class NonAtomicOperations {
     }
     private static class InventoryCounter{
         private int items =0;
+        Object lock = new Object();  //random object to used Synchronized lock
 
-        public synchronized void increment(){
-            items++; //non-atomic statement
+        public void increment(){
+            synchronized (this.lock) {
+                items++; //non-atomic statement
+            }
         }
-        public synchronized void decrement(){
-            items--; //non-atomic statement
+        public void decrement(){
+            synchronized(this.lock) {
+                items--; //non-atomic statement
+            }
         }
-        public synchronized int getItems(){
-            return items;
+        public int getItems(){
+            synchronized(this.lock) {
+                return items;
+            }
         }
     }
 }
